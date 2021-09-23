@@ -49,7 +49,7 @@ While working on a project, we would like to seperate the development and main o
 git checkout development
 ```
 
-Now you are allowed to break everything (but don't). Now in order to push your changes live, we need to open up the terminal again (left-below **Terminal** tab) and execute the following command:
+Now you are allowed to break everything (but don't). Now in order to push your changes live, we need to open up the terminal again (left-below **Terminal** tab) and this time press the **down arrow** and select command prompt. Now you can execute the following command:
 ```sh
 commit.sh
 ```
