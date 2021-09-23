@@ -20,7 +20,7 @@ Awesome! No we are ready to go (actually not, but we can start to code). It's ti
 ```sh 
 pip install -r requirements.txt
 ```
-It may be saying things like 'Requirements already satisfied', but thats a good thing. Once you can enter another command in the terminal, that means the installation of the packages is complete.
+It may be saying things like 'Requirements already satisfied', but thats a good thing. Once you can enter another command in the terminal, that means the installation of the packages is complete. Also in case you add new packages, add them to the requirements.txt file and rerun the same script.
 
 ---
 ## Project structure
@@ -49,11 +49,17 @@ While working on a project, we would like to seperate the development and main o
 git checkout development
 ```
 
-Now you are allowed to break everything (but don't). Now in order to push your changes live, we need to open up the terminal again (left-below **Terminal** tab) and execute the following command:
+Now you are allowed to break everything (but don't). Now in order to push your changes live, we need to open up the terminal again (left-below **Terminal** tab) and this time press the **down arrow** and select command prompt. Now you can execute the following command:
 ```sh
-commit.sh
+commit.sh [your message]
 ```
+Note that the [your message] part should be in quotes, so you get something like 
+```sh
+commit.sh "this is my message"
+```
+
 In case an error pops up, please contact me or check out the following link (if you dare):
 - https://www.jetbrains.com/help/pycharm/resolving-conflicts.html#distributed-version-control-systems
+- https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
  
 *Now you are ready to go! Happy coding :smile:!*
