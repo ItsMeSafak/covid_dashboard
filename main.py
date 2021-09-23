@@ -1,10 +1,6 @@
-import streamlit as st
-import numpy as np
-import pandas as pd
+import components.cool_plot as cool_plot
+from utils.constants import API_URL
 
-st.title('My first app')
-st.write("Here's our first attempt at using data to create a table:")
-st.write(pd.DataFrame({
-    'first column': [1, 2, 3, 4],
-    'second column': [10, 20, 30, 40]
-}))
+if __name__ == "__main__":
+    print(API_URL)
+    cool_plot.main()

@@ -1,0 +1,1 @@
+API_URL = "https://data.rivm.nl/covid-19/"
