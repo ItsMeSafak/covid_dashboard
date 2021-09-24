@@ -4,7 +4,7 @@ from utils.constants import API_URL
 
 
 def riool():
-    df_riool = pd.read_csv(API_URL + 'COVID-19_rioolwaterdata.csv', delimiter=';',parse_dates=["Date_measurement"])
+    df_riool = pd.read_csv(API_URL + 'COVID-19_rioolwaterdata.csv', delimiter=';', parse_dates = ["Date_measurement"])
     df_gemeente = df_riool.set_index("RWZI_AWZI_name")
 
     #laat riool df zien
@@ -20,8 +20,7 @@ def riool():
         ml = "RNA_flow_per_100000"
 
     #stad selectie bar/menu
-    stad = st.selectbox('Selecteer een stad om de riooldata te bekijken.',
-                          df_riool["RWZI_AWZI_name"].unique())
+    stad = st.selectbox('Selecteer een stad om de riooldata te bekijken.',df_riool["RWZI_AWZI_name"].unique())
     data_stad = (df_riool[df_riool["RWZI_AWZI_name"] == stad].set_index("Date_measurement")[ml].sort_index()).dropna()
     st.line_chart(data_stad)
 
@@ -32,3 +31,11 @@ def riool():
 
 
 #st.write(df_gemeente.loc["Assen"])
+
+def ic():
+    df_ic = pd.read_csv(API_URL + 'COVID-19_ic_opnames.csv ', delimiter = ';', parse_dates = ["Date_of_statistics"])
+    st.line_chart(df_ic.set_index("Date_of_statistics")["IC_admission"])
+
+    #ic_cb = st.checkbox('Show ic dataframe')
+    #if ic_cb:
+    #    st.write(df_ic)

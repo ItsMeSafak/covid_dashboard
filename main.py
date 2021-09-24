@@ -10,4 +10,8 @@ if __name__ == "__main__":
     File_01.main()
 
     noah_on = streamlit.checkbox("Noah probeersels")
-    if noah_on: Noah.riool()
+    if noah_on:
+        riool_on = streamlit.checkbox("Riool")
+        if riool_on: Noah.riool()
+        ic_on = streamlit.checkbox("IC opnames")
+        if ic_on: Noah.ic()
