@@ -28,7 +28,11 @@ Let's take a look at the project structure shall we (don't mind the funky colors
 
 ![Project structure](assets/py2.PNG)
 
-The main files and fodler we should be focussing on are the [components](components), [utils](utils), [data](data) and [main.py](main.py). The main file is that starting point of all the code. It should be consisting of lots of functions that will be called of different scripts. These scripts will be coming from the components folder. This folder consists of all the components we will be using/creating. Say for example a plot of registered cases for every country or the amount of deaths over the past months. The data folder is just the data folder where we put all our csv files. The utils folder consists of a few 'helper' functions and variables we may need. 
+The main files and folder we should be focussing on are as follows:
+- [components](components): this folder consists of the plots and graphs we will be creating.
+- [utils](utils): the utils folder consists of handy functions and variables we may need during development.
+- [data](data): the data folder consists of csv files of the datasets.
+- [main.py](main.py): the main file is the starting point of our whole application.
 
 ---
 ## Executing the code
@@ -62,4 +66,11 @@ In case an error pops up, please contact me or check out the following link (if 
 - https://www.jetbrains.com/help/pycharm/resolving-conflicts.html#distributed-version-control-systems
 - https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
  
+ ---
+ ## Handy links
+- [Streamlit cheat sheet](https://share.streamlit.io/daniellewisdl/streamlit-cheat-sheet/app.py)
+- [How to actually use git properly](https://www.freecodecamp.org/news/how-to-use-git-efficiently-54320a236369/)
+- [Streamlit dashboard example(s)](https://streamlit.io/gallery)
+
+
 *Now you are ready to go! Happy coding :smile:!*
