@@ -11,11 +11,12 @@ if __name__ == "__main__":
 
     noah_on = streamlit.checkbox("Noah probeersels")
     if noah_on:
-        riool_on = streamlit.checkbox("Riool")
-        if riool_on: figg.riool()
 
-        ic_on = streamlit.checkbox("IC opnames")
+        ic_on = streamlit.checkbox("Landelijke IC opnames")
         if ic_on: figg.ic()
 
-        testen_on = streamlit.checkbox("Afgenomen Testen")
+        riool_on = streamlit.checkbox("Rioolwater Data per rioolwaterzuiveringsinstalatie")
+        if riool_on: figg.riool()
+
+        testen_on = streamlit.checkbox("Afgenomen Testen per regio")
         if testen_on: figg.testen()
