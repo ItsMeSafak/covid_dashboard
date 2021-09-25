@@ -39,3 +39,16 @@ def ic():
     #ic_cb = st.checkbox('Show ic dataframe')
     #if ic_cb:
     #    st.write(df_ic)
+
+def testen():
+    df_testen = pd.read_csv(API_URL + 'COVID-19_uitgevoerde_testen.csv', delimiter = ';', parse_dates = ["Date_of_statistics"])
+    #st.line_chart(df_testen.set_index("Date_of_statistics")["IC_admission"])
+
+    #ic_cb = st.checkbox('Show ic dataframe')
+    #if ic_cb:
+    #st.write(df_testen)
+    regio = st.selectbox('Selecteer een regio om de test data te bekijken.', df_testen["Security_region_name"].unique())
+    data_regio = (df_testen[df_testen["Security_region_name"] == regio].set_index("Date_of_statistics").sort_index()).dropna()
+    #st.write(data_regio)
+    st.line_chart(data_regio["Tested_with_result"])#,data_regio["Tested_positive"])
+    st.line_chart(data_regio["Tested_positive"])
