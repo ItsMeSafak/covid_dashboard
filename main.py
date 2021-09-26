@@ -1,22 +1,21 @@
-import streamlit
+import streamlit as st
+import inspect
 
-import components.cool_plot as cool_plot
-import components.File_01 as File_01
-import components.Noah as Noah
 import components.Noah_plotly as figg
-# Test comment 7
+import components.base as base
+
+def show_with_options(header, func):
+    st.header(header)
+    if base.showPlots: func()
+    if base.showCode: st.code(inspect.getsource(func))
+
+def initialize_plots():
+    show_with_options('Landelijke IC opnames', figg.ic)
+    show_with_options('Afgenomen tests', figg.testen)
+    show_with_options('Rioolwater data', figg.riool)
+
 if __name__ == "__main__":
-    cool_plot.main()
-    File_01.main()
+    base.main()
+    initialize_plots()
 
-    noah_on = streamlit.checkbox("Noah probeersels")
-    if noah_on:
-
-        ic_on = streamlit.checkbox("Landelijke IC opnames")
-        if ic_on: figg.ic()
-
-        riool_on = streamlit.checkbox("Rioolwater Data per rioolwaterzuiveringsinstalatie")
-        if riool_on: figg.riool()
-
-        testen_on = streamlit.checkbox("Afgenomen Testen per regio")
-        if testen_on: figg.testen()
+    
