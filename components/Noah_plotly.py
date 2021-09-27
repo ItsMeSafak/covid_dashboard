@@ -1,13 +1,14 @@
 import pandas as pd
 import plotly.express as px
 import streamlit as st
-
 from utils.constants import API_URL
+from utils.helpers import load_data
+
 
 def testen():
-    df_testen = pd.read_csv(API_URL + 'COVID-19_uitgevoerde_testen.csv', delimiter=';',
-                            index_col="Date_of_statistics",
-                            parse_dates=["Date_of_statistics"]).sort_index()
+    df_testen = load_data('COVID-19_uitgevoerde_testen.csv',
+                            "Date_of_statistics",
+                            "Date_of_statistics").sort_index()
 
     regio = st.selectbox('Selecteer een regio om de test data te bekijken.',
                          sorted(df_testen["Security_region_name"].unique()))
@@ -38,9 +39,9 @@ def testen():
     st.write(fig)
 
 def ic():
-    df_ic = pd.read_csv(API_URL + 'COVID-19_ic_opnames.csv ', delimiter=';',
-                        parse_dates=["Date_of_statistics"],
-                        index_col="Date_of_statistics").sort_index()
+    df_ic = load_data('COVID-19_ic_opnames.csv ',
+                            "Date_of_statistics",
+                            "Date_of_statistics").sort_index()
     # slice index range
     start, end = (df_ic.index.min().date(), df_ic.index.max().date())
 
@@ -61,10 +62,9 @@ def ic():
     st.write(fig)
 
 def riool():
-    df_riool = pd.read_csv(API_URL + 'COVID-19_rioolwaterdata.csv',
-                           delimiter=';',
-                           parse_dates=["Date_measurement"],
-                           index_col="Date_measurement")
+    df_riool = load_data('COVID-19_rioolwaterdata.csv',
+                            "Date_measurement",
+                            "Date_measurement").sort_index()
 
     # kies rwzi
     rwzi = st.selectbox('Selecteer een stad om de riooldata te bekijken.', sorted(df_riool["RWZI_AWZI_name"].unique()))
@@ -98,10 +98,9 @@ def riool():
 
 
 def Opname_overlijden():
-    df = pd.read_csv(API_URL + 'COVID-19_aantallen_gemeente_per_dag.csv',
-                     delimiter=";",
-                     parse_dates=["Date_of_publication"],
-                     index_col="Date_of_publication").dropna()
+    df = load_data('COVID-19_aantallen_gemeente_per_dag.csv',
+                            "Date_of_publication",
+                            "Date_of_publication").dropna()
 
     region = st.multiselect('Selecteer een regio om de test data te bekijken.',
                             sorted(df["Security_region_name"].unique()),
