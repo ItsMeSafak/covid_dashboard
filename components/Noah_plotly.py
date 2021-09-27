@@ -98,3 +98,24 @@ def riool():
     else:
         st.write("Data ontbreekt voor selectie, deze data is aanwezig:")
         st.write(data_stad)
+
+
+
+def Opname_overlijden():
+    df = pd.read_csv('https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv',
+                     delimiter=";",
+                     parse_dates=["Date_of_publication"],
+                     index_col="Date_of_publication").dropna()
+
+    region = st.multiselect('Selecteer een regio om de test data te bekijken.',
+                            sorted(df["Security_region_name"].unique()),
+                            default=sorted(df["Security_region_name"].unique()) )
+
+    df2 = df.loc[df["Security_region_name"].isin(region)]
+    start, end = (df2.index.min().date(), df2.index.max().date())
+    # slider
+    start_s, end_s = st.slider("Selecteer een periode", start, end, (start, end))
+    df2 = df2[start_s:end_s].groupby(["Security_region_name"]).sum()
+    fig = px.bar(df2, y=["Deceased", "Hospital_admission"], barmode="group")
+
+    st.write(fig)
