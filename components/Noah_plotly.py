@@ -1,7 +1,5 @@
-import pandas as pd
 import plotly.express as px
 import streamlit as st
-from utils.constants import API_URL
 from utils.helpers import load_data
 
 
