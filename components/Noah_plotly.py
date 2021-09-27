@@ -102,7 +102,7 @@ def riool():
 
 
 def Opname_overlijden():
-    df = pd.read_csv('https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv',
+    df = pd.read_csv(API_URL + 'COVID-19_aantallen_gemeente_per_dag.csv',
                      delimiter=";",
                      parse_dates=["Date_of_publication"],
                      index_col="Date_of_publication").dropna()
