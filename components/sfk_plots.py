@@ -1,12 +1,36 @@
 import pandas as pd
-import plotly.express as px
 import streamlit as st
+import plotly.express as px
 
-from utils.constants import API_URL
+from utils.helpers import load_data
+from utils.helpers import load_data
 
 
-def riool():
-    df_ziekenhuis_opnames = pd.read_csv(API_URL + 'COVID-19_ziekenhuis_ic_opnames_per_leeftijdsgroep.csv ',
-                           delimiter=';')
+def age_groups():
+    df_opnames_age = load_data('COVID-19_ziekenhuis_ic_opnames_per_leeftijdsgroep.csv', dates="Date_of_statistics_week_start")
+    df_opnames_dropped = df_opnames_age.drop(columns=['Version', 'Date_of_report'])
+    # df_grouped_by_date = df_opnames_age.groupby('Date_of_statistics_week_start').sum()
+    df_grouped_by_age = df_opnames_dropped.groupby('Age_group').sum()
 
-    df_ziekenhuis_opnames.head()
+    st.write(px.bar(df_grouped_by_age, y=["Hospital_admission", "IC_admission"], barmode="group", labels={
+        "value": "Aantal mensen",
+        "Age_group": "Leeftijdsgroepen",
+        "variable": "Legenda"
+    }))
+
+    region = st.multiselect('Selecteer een leeftijdsgroep om de data te bekijken.',
+                            sorted(df_grouped_by_age.index),
+                            default=sorted(df_grouped_by_age.index[0:2]))
+
+    st.write(px.line(df_opnames_dropped[df_opnames_dropped['Age_group'].isin(region)], x='Date_of_statistics_week_start', y="Hospital_admission", color='Age_group', labels={
+        "Hospital_admission": "Ziekenhuis opnames",
+        "Date_of_statistics_week_start": "Datum van statistiek opname",
+        "Age_group": "Leeftijdsgroep"
+    }))
+
+    # px.line(df_grouped_by_date, y="Hospital_admission", labels={
+    #     "Hospital_admission": "Ziekenhuis opnames",
+    #     "Date_of_statistics_week_start": "Datum van statistiek opname"
+    # })
+
+   
