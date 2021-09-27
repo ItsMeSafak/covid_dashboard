@@ -4,7 +4,6 @@ import streamlit as st
 
 from utils.constants import API_URL
 
-@st.cache
 def testen():
     df_testen = pd.read_csv(API_URL + 'COVID-19_uitgevoerde_testen.csv', delimiter=';',
                             index_col="Date_of_statistics",
@@ -38,7 +37,6 @@ def testen():
     fig.data[1].name = "Afgenomen testen <br> met positief resultaat"
     st.write(fig)
 
-@st.cache
 def ic():
     df_ic = pd.read_csv(API_URL + 'COVID-19_ic_opnames.csv ', delimiter=';',
                         parse_dates=["Date_of_statistics"],
@@ -62,7 +60,6 @@ def ic():
                           "IC_admission": "Aantal IC Opnames"})
     st.write(fig)
 
-@st.cache
 def riool():
     df_riool = pd.read_csv(API_URL + 'COVID-19_rioolwaterdata.csv',
                            delimiter=';',
@@ -100,7 +97,6 @@ def riool():
         st.write(data_stad)
 
 
-@st.cache
 def Opname_overlijden():
     df = pd.read_csv(API_URL + 'COVID-19_aantallen_gemeente_per_dag.csv',
                      delimiter=";",
