@@ -1,6 +1,6 @@
 import pandas as pd
 import streamlit as st
-from utils import API_URL
+from utils.constants import API_URL
 
 @st.cache
 def load_data(url, index, dates):
