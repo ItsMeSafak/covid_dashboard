@@ -22,7 +22,7 @@ def initialize_plots():
     with col3:
         show_with_options('Rioolwater data', noh_figg.riool)
         show_with_options('Ziekenhuis opnames en dodental', noh_figg.Opname_overlijden)
-
+        show_with_options('dodental', noh_figg.sex_dec)
 if __name__ == "__main__":
     base.main()
     initialize_plots()
