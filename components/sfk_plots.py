@@ -23,7 +23,7 @@ def age_groups():
         "value": "Aantal mensen",
         "Age_group": "Leeftijdsgroepen",
         "variable": "Legenda"
-    }))
+    }, width=500, height=300))
 
     region = st.multiselect('Selecteer een leeftijdsgroep om de data te bekijken.',
                             sorted(df_grouped_by_age.index),
@@ -33,11 +33,6 @@ def age_groups():
         "Hospital_admission": "Ziekenhuis opnames",
         "Date_of_statistics_week_start": "Datum van statistiek opname",
         "Age_group": "Leeftijdsgroep"
-    }))
-
-    # px.line(df_grouped_by_date, y="Hospital_admission", labels={
-    #     "Hospital_admission": "Ziekenhuis opnames",
-    #     "Date_of_statistics_week_start": "Datum van statistiek opname"
-    # })
+    }, width=500, height=300))
 
    

@@ -22,11 +22,13 @@ def testen():
 
     # plotly figuur
     fig = px.line(selected_range_fig, x=selected_range_fig.index, y=["Tested_with_result", "Tested_positive"],
-                  title="Afgenomen testen met uitslag en positieve uitslagen: " + regio,
-                  labels={"Date_of_statistics": 'Datum',
-                          "value": "Aantal testen",
-                          "variable": "Data",
-                          "Tested_with_result": "test"})
+                title="Afgenomen testen met uitslag en positieve uitslagen: " + regio,
+                labels={"Date_of_statistics": 'Datum',
+                    "value": "Aantal testen",
+                    "variable": "Data",
+                    "Tested_with_result": "test"},
+                width=500,
+                height=300)
 
     fig.data[0].name = "Afgenomen testen <br> met uitslag"
     fig.data[1].name = "Afgenomen testen <br> met positief resultaat"
@@ -48,7 +50,9 @@ def ic():
     fig = px.line(selected_range_fig, x=selected_range_fig.index, y="IC_admission",
                   title="Landelijke IC Opnames",
                   labels={"Date_of_statistics": 'Datum',
-                          "IC_admission": "Aantal IC Opnames"})
+                          "IC_admission": "Aantal IC Opnames"},
+                width=500,
+                height=300)
     st.write(fig)
 
 
@@ -81,7 +85,9 @@ def riool():
         fig = px.line(selected_range_fig, x=selected_range_fig.index, y=ml[0],
                       title="Rioolwater data " + rwzi,
                       labels={'Date_measurement': 'Datum',
-                              ml[0]: ml[1]}, markers="o")
+                              ml[0]: ml[1]}, markers="o",
+                width=500,
+                height=300)
         st.write(fig)
     else:
         st.write("Data ontbreekt voor selectie, deze data is aanwezig:")
@@ -96,13 +102,13 @@ def Opname_overlijden():
     # nog een catch nodig in geval van lege lijst
     region = st.multiselect('Selecteer een regio om de test data te bekijken.',
                             sorted(df["Security_region_name"].unique()),
-                            default=sorted(df["Security_region_name"].unique()) )
+                            default=sorted(df["Security_region_name"].unique())[0:3] )
     if not(region == []):
         df2 = df.loc[df["Security_region_name"].isin(region)]
         start, end = (df2.index.min().date(), df2.index.max().date())
         # slider
         start_s, end_s = gSlider.start_h, gSlider.end_h#st.slider("Selecteer een periode", start, end, (start, end))
         df2 = df2[start_s:end_s].groupby(["Security_region_name"]).sum()
-        fig = px.bar(df2, y=["Deceased", "Hospital_admission"], barmode="group")
+        fig = px.bar(df2, y=["Deceased", "Hospital_admission"], barmode="group", width=500, height=300)
 
         st.write(fig)
