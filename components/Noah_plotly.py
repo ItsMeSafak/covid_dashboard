@@ -145,5 +145,5 @@ def sex_dec():
     min, max = df["Date_statistics"].min().date(), df["Date_statistics"].max().date()
     periode = str("<br>over periode: " + str(min) + " tot " + str(max))
 
-    fig = px.bar(df5, y=["Yes", "No", "Unknown"], title= "mensen met covid/dodental"+ periode)
+    fig = px.bar(df5, y=["Yes", "No", "Unknown"], title= "mensen met covid/dodental"+ periode, width=500, height=300)
     st.write(fig)
