@@ -147,3 +147,7 @@ def sex_dec():
 
     fig = px.bar(df5, y=["Yes", "No", "Unknown"], title= "mensen met covid/dodental"+ periode, width=500, height=300)
     st.write(fig)
+    df6 = df4.groupby("Agegroup").sum()
+
+    fig = px.pie(df6[5:], values='Yes', names=df6.index[5:], title='Overleden/Leeftijdsgroep' + periode, width=500, height=300)
+    st.write(fig)
