@@ -13,6 +13,9 @@ def age_groups():
 
     # slice df with global date slider
     df_opnames_dropped = df_opnames_dropped.set_index("Date_of_statistics_week_start")[gSlider.start_h: gSlider.end_h]
+    min, max = df_opnames_dropped.index.min().date(), df_opnames_dropped.index.max().date()
+    periode = str("<br>over periode: " + str(min) + " tot " + str(max))
+
     # reset to make sure nothing else is changed
     df_opnames_dropped = df_opnames_dropped.reset_index()
 
@@ -23,7 +26,7 @@ def age_groups():
         "value": "Aantal mensen",
         "Age_group": "Leeftijdsgroepen",
         "variable": "Legenda"
-    }, width=500, height=300))
+    }, width=500, height=300, title = periode))
 
     region = st.multiselect('Selecteer een leeftijdsgroep om de data te bekijken.',
                             sorted(df_grouped_by_age.index),
@@ -33,6 +36,6 @@ def age_groups():
         "Hospital_admission": "Ziekenhuis opnames",
         "Date_of_statistics_week_start": "Datum van statistiek opname",
         "Age_group": "Leeftijdsgroep"
-    }, width=500, height=300))
+    }, width=500, height=300, title = periode))
 
    
