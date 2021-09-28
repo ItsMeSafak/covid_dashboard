@@ -4,6 +4,7 @@ from utils.helpers import load_data
 import components.base as gSlider
 import pandas as pd
 
+
 def testen():
     df_testen = load_data('COVID-19_uitgevoerde_testen.csv',
                             "Date_of_statistics",
@@ -11,6 +12,8 @@ def testen():
 
     regio = st.selectbox('Selecteer een regio om de test data te bekijken.',
                          sorted(df_testen["Security_region_name"].unique()))
+
+    region_ind = df_testen["Security_region_name"].unique()
 
     data_regio = (df_testen[df_testen["Security_region_name"] == regio].dropna())
 
@@ -68,7 +71,7 @@ def riool():
                             "Date_measurement").sort_index()
 
     # kies rwzi
-    rwzi = st.selectbox('Selecteer een stad om de riooldata te bekijken.', sorted(df_riool["RWZI_AWZI_name"].unique()))
+    rwzi = st.selectbox('Selecteer een stad om de riooldata te bekijken.', sorted(df_riool["RWZI_AWZI_name"].unique()), index= sorted(df_riool["RWZI_AWZI_name"].unique()).index("Amsterdam West"))
 
     # kies de waarde "RNA_per_ml" of "RNA per ml"
     data_switch = st.checkbox("ml aan/uit")
@@ -111,6 +114,18 @@ def Opname_overlijden():
     region = st.multiselect('Selecteer een regio om de test data te bekijken.',
                             sorted(df["Security_region_name"].unique()),
                             default=sorted(df["Security_region_name"].unique())[0:3] )
+
+    ind2 = df["Security_region_name"].unique()
+
+    df_testen = load_data('COVID-19_uitgevoerde_testen.csv',
+                            "Date_of_statistics",
+                            "Date_of_statistics").sort_index()
+
+
+    region_ind = df_testen["Security_region_name"].unique()
+
+    print(set(region_ind) - set(ind2))
+
     if not(region == []):
         df2 = df.loc[df["Security_region_name"].isin(region)]
         start, end = (df2.index.min().date(), df2.index.max().date())
@@ -128,7 +143,6 @@ def Opname_overlijden():
 
 
 def sex_dec():
-
     df = load_data('COVID-19_casus_landelijk.csv',
                             "Date_statistics",
                             "Date_statistics")
@@ -163,3 +177,59 @@ def sex_dec():
 
     fig = px.pie(df6, values=var, names=ind, title= pre_title +'/Leeftijdsgroep' + periode, width=500, height=300)
     st.write(fig)
+
+
+# nieuwe versies met sidebar selector
+def Opname_overlijden2():
+    df = load_data('COVID-19_aantallen_gemeente_per_dag.csv',
+                            "Date_of_publication",
+                            "Date_of_publication").dropna()
+
+    if not(gSlider.region == []):
+        df2 = df.loc[df["Security_region_name"].isin(gSlider.region)]
+        start, end = (df2.index.min().date(), df2.index.max().date())
+        # slider
+        start_s, end_s = gSlider.start_h, gSlider.end_h
+
+        df2 = df2[start_s:end_s]
+
+        min, max = df2.index.min().date(), df2.index.max().date()
+        periode = str("<br>over periode: " + str(min) + " tot " + str(max))
+
+        df2 = df2.groupby(["Security_region_name"]).sum()
+        fig = px.bar(df2, y=["Deceased", "Hospital_admission"], barmode="group", title ="Ziekenhuis opnames en dodental per Regio" + periode, width=500, height=300)
+        st.write(fig)
+
+def testen2():
+    df_testen = load_data('COVID-19_uitgevoerde_testen.csv',
+                            "Date_of_statistics",
+                            "Date_of_statistics").sort_index()
+
+
+    if not(gSlider.region == []):
+         data_regio = df_testen.loc[df_testen["Security_region_name"].isin(gSlider.region)]
+         #= (df_testen[df_testen["Security_region_name"] == regio].dropna())
+
+         start, end = (data_regio.index.min().date(), data_regio.index.max().date())
+         # slider
+         start_s, end_s = gSlider.start_h, gSlider.end_h #st.slider("Selecteer een periode", start, end, (start, end))
+         selected_range_fig = data_regio[start_s:end_s]
+
+         min, max = selected_range_fig.index.min().date(), selected_range_fig.index.max().date()
+         periode = str("<br>over periode: " + str(min) + " tot " + str(max))
+
+         selected_range_fig = selected_range_fig.groupby("Date_of_statistics").sum()
+
+         # plotly figuur
+         fig = px.line(selected_range_fig, x=selected_range_fig.index, y=["Tested_with_result", "Tested_positive"],
+                      title="Afgenomen testen met uitslag en positieve uitslagen: " +  periode,
+                      labels={"Date_of_statistics": 'Datum',
+                              "value": "Aantal testen",
+                              "variable": "Data",
+                              "Tested_with_result": "test"},
+                      width=500,
+                      height=300)
+
+         fig.data[0].name = "Afgenomen testen <br> met uitslag"
+         fig.data[1].name = "Afgenomen testen <br> met positief resultaat"
+         st.write(fig)

@@ -28,12 +28,12 @@ def initialize_plots():
 
     with col1:
         show_with_options('Landelijke IC opnames', noh_figg.ic)
-        show_with_options('Afgenomen testen', noh_figg.testen)
+        show_with_options('Afgenomen testen', noh_figg.testen2)
         show_with_options('Leeftijds groepen', sfk_figg.age_groups)
 
     with col3:
         show_with_options('Rioolwater data', noh_figg.riool)
-        show_with_options('Ziekenhuis opnames en dodental', noh_figg.Opname_overlijden)
+        show_with_options('Ziekenhuis opnames en dodental', noh_figg.Opname_overlijden2)
         show_with_options('dodental', noh_figg.sex_dec)
         show_with_options('Reproductie getal', fleur.reproG)
 
