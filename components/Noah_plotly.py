@@ -34,7 +34,7 @@ def testen():
                           "variable": "Data",
                           "Tested_with_result": "test"},
                   width=500,
-                  height=300)
+                  height=400)
 
     fig.data[0].name = "Afgenomen testen <br> met uitslag"
     fig.data[1].name = "Afgenomen testen <br> met positief resultaat"
@@ -61,7 +61,7 @@ def ic():
                   labels={"Date_of_statistics": 'Datum',
                           "IC_admission": "Aantal IC Opnames"},
                 width=500,
-                height=300)
+                height=400)
     st.plotly_chart(fig, use_container_width=True)
 
 
@@ -98,7 +98,7 @@ def riool():
                       labels={'Date_measurement': 'Datum',
                               ml[0]: ml[1]}, markers="o",
                       width=500,
-                      height=300)
+                      height=400)
         st.plotly_chart(fig, use_container_width=True)
     else:
         st.write("Data ontbreekt voor selectie, deze data is aanwezig:")
@@ -137,7 +137,7 @@ def Opname_overlijden():
         periode = str("<br>over periode: " + str(min) + " tot " + str(max))
 
         df2 = df2.groupby(["Security_region_name"]).sum()
-        fig = px.bar(df2, y=["Deceased", "Hospital_admission"], barmode="group", title ="Ziekenhuis opnames en dodental per Regio" + periode, width=500, height=300)
+        fig = px.bar(df2, y=["Deceased", "Hospital_admission"], barmode="group", title ="Ziekenhuis opnames en dodental per Regio" + periode, width=500, height=400)
         st.plotly_chart(fig, use_container_width=True)
 
 
@@ -158,7 +158,7 @@ def sex_dec():
     min, max = df["Date_statistics"].min().date(), df["Date_statistics"].max().date()
     periode = str("<br>over periode: " + str(min) + " tot " + str(max))
 
-    fig = px.bar(df5, y=["Yes", "No", "Unknown"], title= "mensen met covid/dodental"+ periode, width=500, height=300)
+    fig = px.bar(df5, y=["Yes", "No", "Unknown"], title= "mensen met covid/dodental"+ periode, width=500, height=400)
     st.plotly_chart(fig, use_container_width=True)
 
     show_death = st.checkbox('Overleefd', False, key="death")
@@ -174,7 +174,7 @@ def sex_dec():
         df6 = df4.groupby("Agegroup").sum()[5:]
         ind = df4.groupby("Agegroup").sum().index[5:]
 
-    fig = px.pie(df6, values=var, names=ind, title= pre_title +'/Leeftijdsgroep' + periode, width=500, height=300)
+    fig = px.pie(df6, values=var, names=ind, title= pre_title +'/Leeftijdsgroep' + periode, width=500, height=400)
     st.plotly_chart(fig, use_container_width=True)
 
 
@@ -196,7 +196,7 @@ def Opname_overlijden2():
         periode = str("<br>over periode: " + str(min) + " tot " + str(max))
 
         df2 = df2.groupby(["Security_region_name"]).sum()
-        fig = px.bar(df2, y=["Deceased", "Hospital_admission"], barmode="group", title ="Ziekenhuis opnames en dodental per Regio" + periode, width=500, height=300)
+        fig = px.bar(df2, y=["Deceased", "Hospital_admission"], barmode="group", title ="Ziekenhuis opnames en dodental per Regio" + periode, width=500, height=400)
         st.plotly_chart(fig, use_container_width=True)
 
 def testen2():
@@ -227,7 +227,7 @@ def testen2():
                               "variable": "Data",
                               "Tested_with_result": "test"},
                       width=500,
-                      height=300)
+                      height=400)
 
          fig.data[0].name = "Afgenomen testen <br> met uitslag"
          fig.data[1].name = "Afgenomen testen <br> met positief resultaat"

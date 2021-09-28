@@ -26,7 +26,7 @@ def age_groups():
         "value": "Aantal mensen",
         "Age_group": "Leeftijdsgroepen",
         "variable": "Legenda"
-    }, width=500, height=300, title = periode)
+    }, width=500, height=400, title = periode)
     st.plotly_chart(fig, use_container_width=True)
 
     region = st.multiselect('Selecteer een leeftijdsgroep om de data te bekijken.',
@@ -37,7 +37,7 @@ def age_groups():
         "Hospital_admission": "Ziekenhuis opnames",
         "Date_of_statistics_week_start": "Datum van statistiek opname",
         "Age_group": "Leeftijdsgroep"
-    }, width=500, height=300, title = periode)
+    }, width=500, height=400, title = periode)
 
     st.plotly_chart(fig2, use_container_width=True)
 

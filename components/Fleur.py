@@ -27,7 +27,7 @@ def reproG():
                   x='Date',
                   y=['Rt_low', 'Rt_avg', 'Rt_up'],
                   title= 'Reproductiegetal per dag' + periode,
-                  width=500, height=300
+                  width=500, height=400
                  )
 
     # axis updates
