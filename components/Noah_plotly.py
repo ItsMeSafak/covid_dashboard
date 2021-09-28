@@ -29,7 +29,9 @@ def testen():
                   labels={"Date_of_statistics": 'Datum',
                           "value": "Aantal testen",
                           "variable": "Data",
-                          "Tested_with_result": "test"})
+                          "Tested_with_result": "test"},
+                  width=500,
+                  height=300)
 
     fig.data[0].name = "Afgenomen testen <br> met uitslag"
     fig.data[1].name = "Afgenomen testen <br> met positief resultaat"
@@ -54,7 +56,9 @@ def ic():
     fig = px.line(selected_range_fig, x=selected_range_fig.index, y="IC_admission",
                   title="Landelijke IC Opnames" + periode,
                   labels={"Date_of_statistics": 'Datum',
-                          "IC_admission": "Aantal IC Opnames"})
+                          "IC_admission": "Aantal IC Opnames"},
+                width=500,
+                height=300)
     st.write(fig)
 
 
@@ -89,7 +93,9 @@ def riool():
         fig = px.line(selected_range_fig, x=selected_range_fig.index, y=ml[0],
                       title="Rioolwater data: " + rwzi + periode,
                       labels={'Date_measurement': 'Datum',
-                              ml[0]: ml[1]}, markers="o")
+                              ml[0]: ml[1]}, markers="o",
+                      width=500,
+                      height=300)
         st.write(fig)
     else:
         st.write("Data ontbreekt voor selectie, deze data is aanwezig:")
@@ -107,6 +113,7 @@ def Opname_overlijden():
                             default=sorted(df["Security_region_name"].unique()))
 
 
+                            default=sorted(df["Security_region_name"].unique())[0:3] )
     if not(region == []):
         df2 = df.loc[df["Security_region_name"].isin(region)]
         start, end = (df2.index.min().date(), df2.index.max().date())
@@ -119,7 +126,7 @@ def Opname_overlijden():
         periode = str("<br>over periode: " + str(min) + " tot " + str(max))
 
         df2 = df2.groupby(["Security_region_name"]).sum()
-        fig = px.bar(df2, y=["Deceased", "Hospital_admission"], barmode="group", title ="Ziekenhuis opnames en dodental per Regio" + periode)
+        fig = px.bar(df2, y=["Deceased", "Hospital_admission"], barmode="group", title ="Ziekenhuis opnames en dodental per Regio" + periode, width=500, height=300)
         st.write(fig)
 
 

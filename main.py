@@ -12,7 +12,19 @@ def show_with_options(header, func):
     if base.showCode: st.code(inspect.getsource(func))
 
 def initialize_plots():
-    col1, col2, col3 = st.columns([4, 1, 4])
+    col1, _, col3 = st.columns([4, 1, 4])
+    st.markdown(
+            """
+             <style>
+            div[data-testid="stHorizontalBlock"] {
+                background-color: rgba(20, 20, 20, .8);
+                border-radius: 10px;
+                padding: 20px;
+            }
+            </style>
+            """,
+            unsafe_allow_html=True
+         )
 
     with col1:
         show_with_options('Landelijke IC opnames', noh_figg.ic)
