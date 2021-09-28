@@ -140,14 +140,26 @@ def sex_dec():
     df4 = pd.get_dummies(df["Deceased"])
 
     df4 = pd.concat([df, df4], axis=1)
-    df5 = df4.groupby("Sex").sum() #.drop("Unknown")
+    df5 = df4.groupby("Sex").sum()
 
     min, max = df["Date_statistics"].min().date(), df["Date_statistics"].max().date()
     periode = str("<br>over periode: " + str(min) + " tot " + str(max))
 
     fig = px.bar(df5, y=["Yes", "No", "Unknown"], title= "mensen met covid/dodental"+ periode, width=500, height=300)
     st.write(fig)
-    df6 = df4.groupby("Agegroup").sum()
 
-    fig = px.pie(df6[5:], values='Yes', names=df6.index[5:], title='Overleden/Leeftijdsgroep' + periode, width=500, height=300)
+    show_death = st.checkbox('Overleefd', False, key="death")
+
+    if show_death:
+        var = "No"
+        pre_title = "Overleefd"
+        df6 = df4.groupby("Agegroup").sum()
+        ind = df6.index
+    else:
+        var = "Yes"
+        pre_title = "Overleden"
+        df6 = df4.groupby("Agegroup").sum()[5:]
+        ind = df4.groupby("Agegroup").sum().index[5:]
+
+    fig = px.pie(df6, values=var, names=ind, title= pre_title +'/Leeftijdsgroep' + periode, width=500, height=300)
     st.write(fig)
