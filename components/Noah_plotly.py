@@ -110,9 +110,6 @@ def Opname_overlijden():
     # nog een catch nodig in geval van lege lijst
     region = st.multiselect('Selecteer een regio om de test data te bekijken.',
                             sorted(df["Security_region_name"].unique()),
-                            default=sorted(df["Security_region_name"].unique()))
-
-
                             default=sorted(df["Security_region_name"].unique())[0:3] )
     if not(region == []):
         df2 = df.loc[df["Security_region_name"].isin(region)]
