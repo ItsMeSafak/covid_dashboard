@@ -1,8 +1,8 @@
 import pandas as pd
 import streamlit as st
 import plotly.express as px
+import components.base as gSlider
 
-from utils.helpers import load_data
 from utils.helpers import load_data
 
 
@@ -10,6 +10,13 @@ def age_groups():
     df_opnames_age = load_data('COVID-19_ziekenhuis_ic_opnames_per_leeftijdsgroep.csv', dates="Date_of_statistics_week_start")
     df_opnames_dropped = df_opnames_age.drop(columns=['Version', 'Date_of_report'])
     # df_grouped_by_date = df_opnames_age.groupby('Date_of_statistics_week_start').sum()
+
+    # slice df with global date slider
+    df_opnames_dropped = df_opnames_dropped.set_index("Date_of_statistics_week_start")[gSlider.start_h: gSlider.end_h]
+    # reset to make sure nothing else is changed
+    df_opnames_dropped = df_opnames_dropped.reset_index()
+
+
     df_grouped_by_age = df_opnames_dropped.groupby('Age_group').sum()
 
     st.write(px.bar(df_grouped_by_age, y=["Hospital_admission", "IC_admission"], barmode="group", labels={
