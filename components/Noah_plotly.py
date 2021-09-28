@@ -1,6 +1,7 @@
 import plotly.express as px
 import streamlit as st
 from utils.helpers import load_data
+import components.base as gSlider
 
 
 def testen():
@@ -16,13 +17,8 @@ def testen():
     start, end = (data_regio.index.min().date(), data_regio.index.max().date())
 
     # slider
-    start_s, end_s = st.slider("Selecteer een periode", start, end, (start, end))
+    start_s, end_s = gSlider.start_h, gSlider.end_h #st.slider("Selecteer een periode", start, end, (start, end))
     selected_range_fig = data_regio[start_s:end_s]
-
-    # date selector
-    # start_s, end_s = start, end
-    # start_s, end_s = st.date_input("Selecteer een periode", [start, end])
-    # selected_range_fig = data_regio[start_s:end_s]
 
     # plotly figuur
     fig = px.line(selected_range_fig, x=selected_range_fig.index, y=["Tested_with_result", "Tested_positive"],
@@ -36,6 +32,7 @@ def testen():
     fig.data[1].name = "Afgenomen testen <br> met positief resultaat"
     st.write(fig)
 
+
 def ic():
     df_ic = load_data('COVID-19_ic_opnames.csv ',
                             "Date_of_statistics",
@@ -44,13 +41,8 @@ def ic():
     start, end = (df_ic.index.min().date(), df_ic.index.max().date())
 
     # slider
-    start_s, end_s = st.slider("Selecteer een periode", start, end, (start, end))
+    start_s, end_s = gSlider.start_h, gSlider.end_h #st.slider("Selecteer een periode", start, end, (start, end))
     selected_range_fig = df_ic[start_s:end_s]
-
-    # date selector
-    # start_s, end_s = start, end
-    # start_s, end_s = st.date_input("Selecteer een periode", [start, end])
-    # selected_range_fig = df_ic[start_s:end_s]
 
     # plotly figuur
     fig = px.line(selected_range_fig, x=selected_range_fig.index, y="IC_admission",
@@ -58,6 +50,7 @@ def ic():
                   labels={"Date_of_statistics": 'Datum',
                           "IC_admission": "Aantal IC Opnames"})
     st.write(fig)
+
 
 def riool():
     df_riool = load_data('COVID-19_rioolwaterdata.csv',
@@ -79,7 +72,7 @@ def riool():
     if not(data_stad.empty or len(data_stad) <= 2):
         # slider periode
         start, end = (data_stad.index.min().date(), data_stad.index.max().date())
-        start_s, end_s = st.slider("Selecteer een periode", start, end, (start, end))
+        start_s, end_s = gSlider.start_h, gSlider.end_h #st.slider("Selecteer een periode", start, end, (start, end))
 
         # slice dataframe
         selected_range_fig = data_stad[start_s:end_s]
@@ -100,15 +93,16 @@ def Opname_overlijden():
                             "Date_of_publication",
                             "Date_of_publication").dropna()
 
+    # nog een catch nodig in geval van lege lijst
     region = st.multiselect('Selecteer een regio om de test data te bekijken.',
                             sorted(df["Security_region_name"].unique()),
                             default=sorted(df["Security_region_name"].unique()) )
+    if not(region == []):
+        df2 = df.loc[df["Security_region_name"].isin(region)]
+        start, end = (df2.index.min().date(), df2.index.max().date())
+        # slider
+        start_s, end_s = gSlider.start_h, gSlider.end_h#st.slider("Selecteer een periode", start, end, (start, end))
+        df2 = df2[start_s:end_s].groupby(["Security_region_name"]).sum()
+        fig = px.bar(df2, y=["Deceased", "Hospital_admission"], barmode="group")
 
-    df2 = df.loc[df["Security_region_name"].isin(region)]
-    start, end = (df2.index.min().date(), df2.index.max().date())
-    # slider
-    start_s, end_s = st.slider("Selecteer een periode", start, end, (start, end))
-    df2 = df2[start_s:end_s].groupby(["Security_region_name"]).sum()
-    fig = px.bar(df2, y=["Deceased", "Hospital_admission"], barmode="group")
-
-    st.write(fig)
+        st.write(fig)
