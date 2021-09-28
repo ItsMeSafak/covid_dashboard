@@ -2,7 +2,7 @@ import plotly.express as px
 import streamlit as st
 from utils.helpers import load_data
 import components.base as gSlider
-#test
+
 
 def testen():
     df_testen = load_data('COVID-19_uitgevoerde_testen.csv',

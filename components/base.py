@@ -1,7 +1,5 @@
 import streamlit as st
 from datetime import date
-#test
-
 
 
 def sidebar():
@@ -25,9 +23,10 @@ def sidebar():
     showCode = st.sidebar.checkbox('Show code', False)
     showBackground = st.sidebar.checkbox('Achtergrond afbeelding', True)
 
+
     #datum selector
     start_h, end_h = (date(2020, 8, 1), date.today())
-    st.sidebar.write("Selecteer een start en eind datum:")
+    st.sidebar.header("Selecteer een start en eind datum:")
     start_h = st.sidebar.date_input('Start datum', start_h, key = "startd")
     end_h = st.sidebar.date_input('Eind datum', end_h, key = "endd")
 
