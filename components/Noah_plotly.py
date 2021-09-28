@@ -38,7 +38,7 @@ def testen():
 
     fig.data[0].name = "Afgenomen testen <br> met uitslag"
     fig.data[1].name = "Afgenomen testen <br> met positief resultaat"
-    st.write(fig)
+    st.plotly_chart(fig, use_container_width=True)
 
 
 def ic():
@@ -62,7 +62,7 @@ def ic():
                           "IC_admission": "Aantal IC Opnames"},
                 width=500,
                 height=300)
-    st.write(fig)
+    st.plotly_chart(fig, use_container_width=True)
 
 
 def riool():
@@ -99,7 +99,7 @@ def riool():
                               ml[0]: ml[1]}, markers="o",
                       width=500,
                       height=300)
-        st.write(fig)
+        st.plotly_chart(fig, use_container_width=True)
     else:
         st.write("Data ontbreekt voor selectie, deze data is aanwezig:")
         st.write(data_stad)
@@ -124,7 +124,6 @@ def Opname_overlijden():
 
     region_ind = df_testen["Security_region_name"].unique()
 
-    print(set(region_ind) - set(ind2))
 
     if not(region == []):
         df2 = df.loc[df["Security_region_name"].isin(region)]
@@ -139,7 +138,7 @@ def Opname_overlijden():
 
         df2 = df2.groupby(["Security_region_name"]).sum()
         fig = px.bar(df2, y=["Deceased", "Hospital_admission"], barmode="group", title ="Ziekenhuis opnames en dodental per Regio" + periode, width=500, height=300)
-        st.write(fig)
+        st.plotly_chart(fig, use_container_width=True)
 
 
 def sex_dec():
@@ -160,7 +159,7 @@ def sex_dec():
     periode = str("<br>over periode: " + str(min) + " tot " + str(max))
 
     fig = px.bar(df5, y=["Yes", "No", "Unknown"], title= "mensen met covid/dodental"+ periode, width=500, height=300)
-    st.write(fig)
+    st.plotly_chart(fig, use_container_width=True)
 
     show_death = st.checkbox('Overleefd', False, key="death")
 
@@ -176,7 +175,7 @@ def sex_dec():
         ind = df4.groupby("Agegroup").sum().index[5:]
 
     fig = px.pie(df6, values=var, names=ind, title= pre_title +'/Leeftijdsgroep' + periode, width=500, height=300)
-    st.write(fig)
+    st.plotly_chart(fig, use_container_width=True)
 
 
 # nieuwe versies met sidebar selector
@@ -198,7 +197,7 @@ def Opname_overlijden2():
 
         df2 = df2.groupby(["Security_region_name"]).sum()
         fig = px.bar(df2, y=["Deceased", "Hospital_admission"], barmode="group", title ="Ziekenhuis opnames en dodental per Regio" + periode, width=500, height=300)
-        st.write(fig)
+        st.plotly_chart(fig, use_container_width=True)
 
 def testen2():
     df_testen = load_data('COVID-19_uitgevoerde_testen.csv',
@@ -232,4 +231,4 @@ def testen2():
 
          fig.data[0].name = "Afgenomen testen <br> met uitslag"
          fig.data[1].name = "Afgenomen testen <br> met positief resultaat"
-         st.write(fig)
+         st.plotly_chart(fig, use_container_width=True)

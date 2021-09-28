@@ -22,20 +22,23 @@ def age_groups():
 
     df_grouped_by_age = df_opnames_dropped.groupby('Age_group').sum()
 
-    st.write(px.bar(df_grouped_by_age, y=["Hospital_admission", "IC_admission"], barmode="group", labels={
+    fig = px.bar(df_grouped_by_age, y=["Hospital_admission", "IC_admission"], barmode="group", labels={
         "value": "Aantal mensen",
         "Age_group": "Leeftijdsgroepen",
         "variable": "Legenda"
-    }, width=500, height=300, title = periode))
+    }, width=500, height=300, title = periode)
+    st.plotly_chart(fig, use_container_width=True)
 
     region = st.multiselect('Selecteer een leeftijdsgroep om de data te bekijken.',
                             sorted(df_grouped_by_age.index),
                             default=sorted(df_grouped_by_age.index[0:2]))
 
-    st.write(px.line(df_opnames_dropped[df_opnames_dropped['Age_group'].isin(region)], x='Date_of_statistics_week_start', y="Hospital_admission", color='Age_group', labels={
+    fig2 = px.line(df_opnames_dropped[df_opnames_dropped['Age_group'].isin(region)], x='Date_of_statistics_week_start', y="Hospital_admission", color='Age_group', labels={
         "Hospital_admission": "Ziekenhuis opnames",
         "Date_of_statistics_week_start": "Datum van statistiek opname",
         "Age_group": "Leeftijdsgroep"
-    }, width=500, height=300, title = periode))
+    }, width=500, height=300, title = periode)
+
+    st.plotly_chart(fig2, use_container_width=True)
 
    

@@ -34,5 +34,4 @@ def reproG():
     fig.update_layout({'xaxis': {'title': {'text': 'Datum'}},
                       'yaxis': {'title': {'text': 'Reproductie getal'}}})
 
-
-    st.write(fig)
+    st.plotly_chart(fig, use_container_width=True)
