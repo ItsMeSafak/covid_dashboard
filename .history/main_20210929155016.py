@@ -35,7 +35,7 @@ def initialize_plots():
          )
         
     st.header('COVID-19 Dashboard')
-
+    
     _, header_col, _ = st.columns([1, 8, 1])
     col1, _, col3 = st.columns([4, 1, 4])
     col4, _, col6 = st.columns([4, 1, 4])

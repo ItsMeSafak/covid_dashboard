@@ -8,6 +8,7 @@ import components.base as gSlider
 def reproG():
     url= 'COVID-19_reproductiegetal.json'
     df = load_data(url, json=True)
+    print(df.head())
     df['Date'] = pd.to_datetime(df['Date'])
     df2= df.astype({'Rt_low': 'float64','Rt_avg': 'float64','Rt_up': 'float64'})
 

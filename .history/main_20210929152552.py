@@ -12,6 +12,11 @@ def show_with_options(header, func):
     if base.showCode: st.code(inspect.getsource(func))
 
 def initialize_plots():
+    _, header_col, _ = st.columns([1, 8, 1])
+    col1, _, col3 = st.columns([4, 1, 4])
+    col4, _, col6 = st.columns([4, 1, 4])
+    col7, _, col9 = st.columns([4, 1, 4])
+
     st.markdown(
             """
              <style>
@@ -22,24 +27,10 @@ def initialize_plots():
                 margin-bottom: 50px;   
             }
 
-            #covid-19-dashboard {
-                background-color: rgba(20, 20, 20, .8);
-                border-radius: 10px;
-                padding: 20px;
-                margin-bottom: 50px;  
-            }
-
             </style>
             """,
             unsafe_allow_html=True
          )
-        
-    st.header('COVID-19 Dashboard')
-
-    _, header_col, _ = st.columns([1, 8, 1])
-    col1, _, col3 = st.columns([4, 1, 4])
-    col4, _, col6 = st.columns([4, 1, 4])
-    col7, _, col9 = st.columns([4, 1, 4])
 
     with header_col:
         show_with_options('Landelijke IC opnames', noh_figg.ic)
