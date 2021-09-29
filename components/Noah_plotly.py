@@ -49,6 +49,7 @@ def ic():
     start, end = (df_ic.index.min().date(), df_ic.index.max().date())
 
     # slider
+
     start_s, end_s = gSlider.start_h, gSlider.end_h #st.slider("Selecteer een periode", start, end, (start, end))
     selected_range_fig = df_ic[start_s:end_s]
 
@@ -73,15 +74,8 @@ def riool():
     # kies rwzi
     rwzi = st.selectbox('Selecteer een stad om de riooldata te bekijken.', sorted(df_riool["RWZI_AWZI_name"].unique()), index= sorted(df_riool["RWZI_AWZI_name"].unique()).index("Amsterdam West"))
 
-    # kies de waarde "RNA_per_ml" of "RNA per ml"
-    data_switch = st.checkbox("ml aan/uit")
-    if data_switch:
-        ml = ("RNA_per_ml", "RNA per ml")
-    else:
-        ml = ("RNA_flow_per_100000", "RNA flow per 100000 inwoners")
-
     # stad selectie dataframe
-    data_stad = df_riool[df_riool["RWZI_AWZI_name"] == rwzi][ml[0]].dropna().sort_index()
+    data_stad = df_riool[df_riool["RWZI_AWZI_name"] == rwzi]["RNA_flow_per_100000"].dropna().sort_index()
     if not(data_stad.empty or len(data_stad) <= 2):
         # slider periode
         start, end = (data_stad.index.min().date(), data_stad.index.max().date())
@@ -93,10 +87,10 @@ def riool():
         periode = str("<br>over periode: " + str(min) + " tot " + str(max))
 
         # plotly
-        fig = px.line(selected_range_fig, x=selected_range_fig.index, y=ml[0],
+        fig = px.line(selected_range_fig, x=selected_range_fig.index, y="RNA_flow_per_100000",
                       title="Rioolwater data: " + rwzi + periode,
                       labels={'Date_measurement': 'Datum',
-                              ml[0]: ml[1]}, markers="o",
+                              "RNA_flow_per_100000": "RNA flow per 100000 inwoners"}, markers="o",
                       width=500,
                       height=400)
         st.plotly_chart(fig, use_container_width=True)
