@@ -49,6 +49,7 @@ def ic():
     start, end = (df_ic.index.min().date(), df_ic.index.max().date())
 
     # slider
+
     start_s, end_s = gSlider.start_h, gSlider.end_h #st.slider("Selecteer een periode", start, end, (start, end))
     selected_range_fig = df_ic[start_s:end_s]
 
