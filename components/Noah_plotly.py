@@ -42,7 +42,7 @@ def testen():
 
 
 def ic():
-    df_ic = load_data('COVID-19_ic_opnames.csv ',
+    df_ic = load_data('COVID-19_ic_opnames.csv',
                             "Date_of_statistics",
                             "Date_of_statistics").sort_index()
     # slice index range
@@ -137,7 +137,7 @@ def Opname_overlijden():
         periode = str("<br>over periode: " + str(min) + " tot " + str(max))
 
         df2 = df2.groupby(["Security_region_name"]).sum()
-        fig = px.bar(df2, y=["Deceased", "Hospital_admission"], barmode="group", title ="Ziekenhuis opnames en dodental per Regio" + periode, width=500, height=400)
+        fig = px.bar(df2, y=["Deceased", "Hospital_admission"], barmode="group", title ="Ziekenhuisopnames en dodental per Regio" + periode, width=500, height=400)
         st.plotly_chart(fig, use_container_width=True)
 
 
@@ -158,7 +158,14 @@ def sex_dec():
     min, max = df["Date_statistics"].min().date(), df["Date_statistics"].max().date()
     periode = str("<br>over periode: " + str(min) + " tot " + str(max))
 
-    fig = px.bar(df5, y=["Yes", "No", "Unknown"], title= "mensen met covid/dodental"+ periode, width=500, height=400)
+    fig = px.bar(df5, y=["Yes", "No", "Unknown"], labels={
+        "value": "Aantal mensen",
+        "x": "Geslacht",
+        "variable": "Legenda",
+    }, x=["Vrouwen", "Mannen"], title= "Mensen met covid/dodental"+ periode, width=500, height=400)
+    fig.data[0].name = "Overleden"
+    fig.data[1].name = "Overleefd"
+    fig.data[2].name = "Onbekend"
     st.plotly_chart(fig, use_container_width=True)
 
     show_death = st.checkbox('Overleefd', False, key="death")
@@ -196,7 +203,14 @@ def Opname_overlijden2():
         periode = str("<br>over periode: " + str(min) + " tot " + str(max))
 
         df2 = df2.groupby(["Security_region_name"]).sum()
-        fig = px.bar(df2, y=["Deceased", "Hospital_admission"], barmode="group", title ="Ziekenhuis opnames en dodental per Regio" + periode, width=500, height=400)
+        fig = px.bar(df2, y=["Deceased", "Hospital_admission"], barmode="group",
+        labels={
+            "value": "Aantal mensen",
+            "Security_region_name": "Veiligheidsregio's",
+            "variable": "Legenda"
+        }, title ="Ziekenhuisopnames en dodental per Regio" + periode, width=500, height=400)
+        fig.data[0].name = "Overleden"
+        fig.data[1].name = "Ziekenhuisopnames"
         st.plotly_chart(fig, use_container_width=True)
 
 def testen2():
@@ -221,7 +235,7 @@ def testen2():
 
          # plotly figuur
          fig = px.line(selected_range_fig, x=selected_range_fig.index, y=["Tested_with_result", "Tested_positive"],
-                      title="Afgenomen testen met uitslag en positieve uitslagen: " +  periode,
+                      title="Afgenomen testen met uitslag en positieve uitslagen<br>voor geselecteerde veiligheidsregio's: " +  periode,
                       labels={"Date_of_statistics": 'Datum',
                               "value": "Aantal testen",
                               "variable": "Data",

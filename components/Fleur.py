@@ -27,8 +27,12 @@ def reproG():
                   x='Date',
                   y=['Rt_low', 'Rt_avg', 'Rt_up'],
                   title= 'Reproductiegetal per dag' + periode,
+                  labels={"variable": "Legenda"},
                   width=500, height=400
                  )
+    fig.data[0].name = "Ondergrens"
+    fig.data[1].name = "Gemiddelde"
+    fig.data[2].name = "Bovengrens"
 
     # axis updates
     fig.update_layout({'xaxis': {'title': {'text': 'Datum'}},
