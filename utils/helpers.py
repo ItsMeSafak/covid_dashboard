@@ -2,12 +2,6 @@ import pandas as pd
 import streamlit as st
 from utils.constants import API_URL
 
-# @st.cache
-# def load_data(url, index=None, dates=False, json=False, local=False):
-#     if (json):
-#         return pd.read_json(API_URL + url)
-#     else:
-#         return pd.read_csv(API_URL + url, delimiter=';', index_col=index, parse_dates=[dates])
 
 def load_data(url, index=None, dates=False, json=False, local=False):
     meta_data = url[:-3] + 'html'

@@ -1,22 +1,19 @@
-import pandas as pd
 import streamlit as st
 import plotly.express as px
 import components.base as gSlider
+from utils.helpers import write_meta
 
-from utils.helpers import load_data
 
-
-def admissions():
-    df_opnames_age = load_data('COVID-19_ziekenhuis_ic_opnames_per_leeftijdsgroep.csv', dates="Date_of_statistics_week_start")
+def admissions_plot():
+    df_opnames_age = write_meta('COVID-19_ziekenhuis_ic_opnames_per_leeftijdsgroep.csv', dates="Date_of_statistics_week_start", index="Date_of_statistics_week_start")
     df_opnames_dropped = df_opnames_age.drop(columns=['Version', 'Date_of_report'])
-    # df_grouped_by_date = df_opnames_age.groupby('Date_of_statistics_week_start').sum()
 
-    # slice df with global date slider
-    df_opnames_dropped = df_opnames_dropped.set_index("Date_of_statistics_week_start")[gSlider.start_h: gSlider.end_h]
+    # Slice dataframe with global date slider
+    df_opnames_dropped = df_opnames_dropped[gSlider.start_h: gSlider.end_h]
     min, max = df_opnames_dropped.index.min().date(), df_opnames_dropped.index.max().date()
     periode = str("<br>over periode: " + str(min) + " tot " + str(max))
 
-    # reset to make sure nothing else is changed
+    # Reset to make sure nothing else is changed
     df_opnames_dropped = df_opnames_dropped.reset_index()
     df_grouped_by_age = df_opnames_dropped.groupby('Age_group').sum()
 
@@ -31,13 +28,12 @@ def admissions():
 
     st.plotly_chart(fig2, use_container_width=True)
 
-def age_groups():
-    df_opnames_age = load_data('COVID-19_ziekenhuis_ic_opnames_per_leeftijdsgroep.csv', dates="Date_of_statistics_week_start")
+def age_groups_plot():
+    df_opnames_age = write_meta('COVID-19_ziekenhuis_ic_opnames_per_leeftijdsgroep.csv', dates="Date_of_statistics_week_start", index="Date_of_statistics_week_start")
     df_opnames_dropped = df_opnames_age.drop(columns=['Version', 'Date_of_report'])
-    # df_grouped_by_date = df_opnames_age.groupby('Date_of_statistics_week_start').sum()
 
-    # slice df with global date slider
-    df_opnames_dropped = df_opnames_dropped.set_index("Date_of_statistics_week_start")[gSlider.start_h: gSlider.end_h]
+    # Slice dataframe with global date slider
+    df_opnames_dropped = df_opnames_dropped[gSlider.start_h: gSlider.end_h]
     min, max = df_opnames_dropped.index.min().date(), df_opnames_dropped.index.max().date()
     periode = str("<br>over periode: " + str(min) + " tot " + str(max))
 

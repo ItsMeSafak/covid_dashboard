@@ -1,24 +1,22 @@
-from utils.helpers import load_data
+from utils.helpers import write_meta
 import pandas as pd
 import plotly.express as px
 import streamlit as st
 import components.base as gSlider
 
 
-def reproG():
-    url= 'COVID-19_reproductiegetal.json'
-    df = load_data(url, json=True)
+def reproduction_plot():
+    df = write_meta('COVID-19_reproductiegetal.json', json=True)
     df['Date'] = pd.to_datetime(df['Date'])
-    df2= df.astype({'Rt_low': 'float64','Rt_avg': 'float64','Rt_up': 'float64'})
 
-    df2 = df2.set_index("Date")[gSlider.start_h: gSlider.end_h]
-    min, max = df2.index.min().date(), df2.index.max().date()
+    df = df.set_index("Date")[gSlider.start_h: gSlider.end_h]
+    min, max = df.index.min().date(), df.index.max().date()
     periode = str("<br>over periode: " + str(min) + " tot " + str(max))
 
-    # reset to make sure nothing else is changed
-    df2 = df2.reset_index()
+    # Reset to make sure nothing else is changed
+    df = df.reset_index()
 
-    fig = px.line(data_frame=df2,
+    fig = px.line(data_frame=df,
                   x='Date',
                   y=['Rt_low', 'Rt_avg', 'Rt_up'],
                   title= 'Reproductiegetal per dag' + periode,
@@ -29,7 +27,7 @@ def reproG():
     fig.data[1].name = "Gemiddelde"
     fig.data[2].name = "Bovengrens"
 
-    # axis updates
+    # Axis updates
     fig.update_layout({'xaxis': {'title': {'text': 'Datum'}},
                       'yaxis': {'title': {'text': 'Reproductie getal'}}})
 

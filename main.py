@@ -1,10 +1,10 @@
 import streamlit as st
 import inspect
-
-import components.Noah_plotly as noh_figg
+import components.noh_plots as noh_figg
 import components.sfk_plots as sfk_figg
-import components.Fleur as fleur
+import components.flr_plots as flr_figg
 import components.base as base
+
 
 def show_with_options(header, func, text=''):
     st.header(header)
@@ -46,31 +46,32 @@ def initialize_plots():
     with open('assets/toelichting.txt') as file:
         lines = file.readlines()
         lines = [line.rstrip() for line in lines]
+
         with header_col:
-            show_with_options('Landelijke IC opnames', noh_figg.ic, lines[0])
+            show_with_options('Landelijke IC opnames', noh_figg.ic_plot, lines[0])
 
         with col1:
             st.markdown('*Sectie 1*')
-            show_with_options('Dodental per geslacht', noh_figg.sex_dec, lines[1])
+            show_with_options('Dodental per geslacht', noh_figg.sex_dec_plot, lines[1])
         with col3:
             st.markdown('  ')
             st.markdown('  ')
-            show_with_options('Reproductie getal', fleur.reproG, lines[2])
-            show_with_options('Leeftijdsgroepen', sfk_figg.age_groups)
+            show_with_options('Reproductie getal', flr_figg.reproduction_plot, lines[2])
+            show_with_options('Leeftijdsgroepen', sfk_figg.age_groups_plot)
 
         with col4:
             st.markdown('*Sectie 2*')
-            show_with_options('Afgenomen testen', noh_figg.testen2, lines[3] + '\n' + lines[4])
+            show_with_options('Afgenomen testen', noh_figg.tests_plot, lines[3] + '\n' + lines[4])
         with col6:
             st.markdown(' ')
-            show_with_options('Ziekenhuisopnames en dodental', noh_figg.Opname_overlijden2, lines[5])
+            show_with_options('Ziekenhuisopnames en dodental', noh_figg.death_admission_plot, lines[5])
 
         with col7:
             st.markdown('*Sectie 3*')
-            show_with_options('Ziekenhuisopnames in leeftijdsgroepen', sfk_figg.admissions, lines[6])
+            show_with_options('Ziekenhuisopnames in leeftijdsgroepen', sfk_figg.admissions_plot, lines[6])
         with col9:
             st.write('  ')
-            show_with_options('Rioolwater data', noh_figg.riool, lines[7])
+            show_with_options('Rioolwater data', noh_figg.sewer_plot, lines[7])
 
 if __name__ == "__main__":
     base.main()

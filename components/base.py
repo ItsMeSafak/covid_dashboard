@@ -1,8 +1,8 @@
 import streamlit as st
 from datetime import date
 
-
 def sidebar():
+    # Global variables to check on plots
     global showPlots
     global showCode
     global start_h
@@ -20,19 +20,22 @@ def sidebar():
     st.sidebar.header('Dashboard setings')
     st.sidebar.write('Display settings:')
 
+    # Checkboxes for showing plots/code
     showPlots = st.sidebar.checkbox('Show plots', True)
     showCode = st.sidebar.checkbox('Show code', False)
     showBackground = st.sidebar.checkbox('Achtergrond afbeelding', True)
 
-    #datum selector
+    # Date selector
     start_h, end_h = (date(2020, 8, 1), date.today())
     st.sidebar.header("Selecteer een start en eind datum:")
     start_h = st.sidebar.date_input('Start datum', start_h, key = "startd")
     end_h = st.sidebar.date_input('Eind datum', end_h, key = "endd")
 
+    # Slider for date
     start_h, end_h = st.sidebar.slider("Selecteer een periode", start_h, end_h,
                                        (start_h, end_h), key="Globalslider")
 
+    # Multi select for regions
     st.sidebar.markdown('*Deze multi select is alleen van toepassing op sectie 2*')
     region = st.sidebar.multiselect('Selecteer een regio om de data te bekijken.',
                             sorted(['Groningen', 'Flevoland', 'Fryslân', 'Drenthe', 'Twente', 'IJsselland',
@@ -50,7 +53,6 @@ def sidebar():
                                             'Zeeland', 'Brabant-Zuidoost', 'Midden- en West-Brabant', 'Brabant-Noord',
                                             'Limburg-Zuid', 'Limburg-Noord']))
 
-# mischien leuk met bg img, als het mogelijk is moet de achtergrondstijd van de widgets nog aangepast worden (rounded corners ofz)
 def set_bg():
     if showBackground:
         st.markdown(

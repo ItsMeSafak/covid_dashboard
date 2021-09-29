@@ -67,6 +67,15 @@ In case an error pops up, please contact me or check out the following link (if 
 - https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
  
  ---
+ ## API/dataset usage
+ Alright so, we made use of the COVID-19 dataset, which gets delivered and updated every day by the government of the Netherlands. This open source consists of various sets of data regarding the COVI-19 cases in Holland. 
+- Base url: https://data.rivm.nl/covid-19/
+- Data set (both csv and json are available) example: https://data.rivm.nl/covid-19/COVID-19_Infectieradar_symptomen_per_dag.csv
+- METADATA for the given dataset: https://data.rivm.nl/covid-19/COVID-19_Infectieradar_symptomen_per_dag.html. This page covers every info about the data, what it is about and what the columns represent.
+
+We paste this url into the read_csv() function of pandas, seperated by a semicolon (;), and it immediately parses it into a dataframe. We then use this dataframe to show statistics.
+
+ ---
  ## Handy links
 - [Streamlit cheat sheet](https://share.streamlit.io/daniellewisdl/streamlit-cheat-sheet/app.py)
 - [How to actually use git properly](https://www.freecodecamp.org/news/how-to-use-git-efficiently-54320a236369/)
