@@ -44,8 +44,8 @@ def initialize_plots():
     with header_col:
         show_with_options('Landelijke IC opnames', noh_figg.ic)
 
-    with col1:
-        show_with_options('Dodental', noh_figg.sex_dec)
+    # with col1:
+    #     show_with_options('Dodental', noh_figg.sex_dec)
 
     with col3:
         show_with_options('Reproductie getal', fleur.reproG)
