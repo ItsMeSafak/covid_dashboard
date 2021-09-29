@@ -8,6 +8,7 @@ def sidebar():
     global start_h
     global end_h
     global showBackground
+    global region
 
     # Initial page config
     st.set_page_config(
@@ -23,7 +24,6 @@ def sidebar():
     showCode = st.sidebar.checkbox('Show code', False)
     showBackground = st.sidebar.checkbox('Achtergrond afbeelding', True)
 
-
     #datum selector
     start_h, end_h = (date(2020, 8, 1), date.today())
     st.sidebar.header("Selecteer een start en eind datum:")
@@ -33,6 +33,22 @@ def sidebar():
     start_h, end_h = st.sidebar.slider("Selecteer een periode", start_h, end_h,
                                        (start_h, end_h), key="Globalslider")
 
+    st.sidebar.markdown('*Deze multi select is alleen van toepassing op sectie 2*')
+    region = st.sidebar.multiselect('Selecteer een regio om de data te bekijken.',
+                            sorted(['Groningen', 'Flevoland', 'Fryslân', 'Drenthe', 'Twente', 'IJsselland',
+                                            'Noord- en Oost-Gelderland', 'Gelderland-Midden', 'Gelderland-Zuid',
+                                            'Utrecht', 'Amsterdam-Amstelland', 'Noord-Holland-Noord',
+                                            'Zaanstreek-Waterland', 'Kennemerland', 'Gooi en Vechtstreek',
+                                            'Zuid-Holland-Zuid', 'Hollands-Midden', 'Rotterdam-Rijnmond', 'Haaglanden',
+                                            'Zeeland', 'Brabant-Zuidoost', 'Midden- en West-Brabant', 'Brabant-Noord',
+                                            'Limburg-Zuid', 'Limburg-Noord']),
+                                    default= sorted(['Groningen', 'Flevoland', 'Fryslân', 'Drenthe', 'Twente', 'IJsselland',
+                                            'Noord- en Oost-Gelderland', 'Gelderland-Midden', 'Gelderland-Zuid',
+                                            'Utrecht', 'Amsterdam-Amstelland', 'Noord-Holland-Noord',
+                                            'Zaanstreek-Waterland', 'Kennemerland', 'Gooi en Vechtstreek',
+                                            'Zuid-Holland-Zuid', 'Hollands-Midden', 'Rotterdam-Rijnmond', 'Haaglanden',
+                                            'Zeeland', 'Brabant-Zuidoost', 'Midden- en West-Brabant', 'Brabant-Noord',
+                                            'Limburg-Zuid', 'Limburg-Noord']))
 
 # mischien leuk met bg img, als het mogelijk is moet de achtergrondstijd van de widgets nog aangepast worden (rounded corners ofz)
 def set_bg():
@@ -51,5 +67,3 @@ def set_bg():
 def main():
     sidebar()
     set_bg()
-
-
