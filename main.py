@@ -8,8 +8,9 @@ import components.base as base
 
 def show_with_options(header, func):
     st.header(header)
-    if base.showPlots: func()
-    if base.showCode: st.code(inspect.getsource(func))
+    with st.expander(header, True):
+        if base.showPlots: func()
+        if base.showCode: st.code(inspect.getsource(func))
 
 def initialize_plots():
     st.markdown(
