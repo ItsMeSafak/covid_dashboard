@@ -45,20 +45,27 @@ def initialize_plots():
         show_with_options('Landelijke IC opnames', noh_figg.ic)
 
     with col1:
-        show_with_options('Dodental', noh_figg.sex_dec)
+        st.markdown('*Sectie 1*')
+        show_with_options('Dodental per geslacht', noh_figg.sex_dec)
 
     with col3:
+        st.markdown('  ')
+        st.markdown('  ')
         show_with_options('Reproductie getal', fleur.reproG)
         show_with_options('Leeftijdsgroepen', sfk_figg.age_groups)
     
     with col4:
+        st.markdown('*Sectie 2*')
         show_with_options('Afgenomen testen', noh_figg.testen2)
     with col6:
+        st.markdown(' ')
         show_with_options('Ziekenhuisopnames en dodental', noh_figg.Opname_overlijden2)
 
     with col7:
+        st.markdown('*Sectie 3*')
         show_with_options('Ziekenhuisopnames in leeftijdsgroepen', sfk_figg.admissions)
     with col9:
+        st.write('  ')
         show_with_options('Rioolwater data', noh_figg.riool)
 
 

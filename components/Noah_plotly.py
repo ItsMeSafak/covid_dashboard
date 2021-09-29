@@ -136,6 +136,7 @@ def Opname_overlijden():
 
 
 def sex_dec():
+    pre_title = ''
     df = load_data('COVID-19_casus_landelijk.csv',
                             "Date_statistics",
                             "Date_statistics")
@@ -162,6 +163,7 @@ def sex_dec():
     fig.data[2].name = "Onbekend"
     st.plotly_chart(fig, use_container_width=True)
 
+    header = st.header('Verdeling overleden')
     show_death = st.checkbox('Overleefd', False, key="death")
 
     if show_death:
@@ -169,11 +171,15 @@ def sex_dec():
         pre_title = "Overleefd"
         df6 = df4.groupby("Agegroup").sum()
         ind = df6.index
+        header.header('Verdeling overleefd')
+        
     else:
         var = "Yes"
         pre_title = "Overleden"
         df6 = df4.groupby("Agegroup").sum()[5:]
         ind = df4.groupby("Agegroup").sum().index[5:]
+        header.header('Verdeling overleden')
+
 
     fig = px.pie(df6, values=var, names=ind, title= pre_title +'/Leeftijdsgroep' + periode, width=500, height=400)
     st.plotly_chart(fig, use_container_width=True)
@@ -208,6 +214,7 @@ def Opname_overlijden2():
         st.plotly_chart(fig, use_container_width=True)
 
 def testen2():
+    st.write('  ')
     df_testen = load_data('COVID-19_uitgevoerde_testen.csv',
                             "Date_of_statistics",
                             "Date_of_statistics").sort_index()

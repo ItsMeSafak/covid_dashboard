@@ -35,7 +35,8 @@ def sidebar():
     start_h, end_h = st.sidebar.slider("Selecteer een periode", start_h, end_h,
                                        (start_h, end_h), key="Globalslider")
 
-    region = st.sidebar.multiselect('Selecteer een regio om de test data te bekijken.',
+    st.sidebar.markdown('*Deze multi select is alleen van toepassing op sectie 2*')
+    region = st.sidebar.multiselect('Selecteer een regio om de data te bekijken.',
                             sorted(['Groningen', 'Flevoland', 'Fryslân', 'Drenthe', 'Twente', 'IJsselland',
                                             'Noord- en Oost-Gelderland', 'Gelderland-Midden', 'Gelderland-Zuid',
                                             'Utrecht', 'Amsterdam-Amstelland', 'Noord-Holland-Noord',
