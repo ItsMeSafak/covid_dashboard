@@ -68,6 +68,8 @@ In case an error pops up, please contact me or check out the following link (if 
  
  ---
  ## API/dataset usage
+
+ ### RIVM Covid-19
  Alright so, we made use of the COVID-19 dataset, which gets delivered and updated every day by the government of the Netherlands. This open source consists of various sets of data regarding the COVI-19 cases in Holland. 
 - Base url: https://data.rivm.nl/covid-19/
 - Data set (both csv and json are available) example: https://data.rivm.nl/covid-19/COVID-19_Infectieradar_symptomen_per_dag.csv
@@ -75,6 +77,25 @@ In case an error pops up, please contact me or check out the following link (if 
 
 We paste this url into the read_csv() function of pandas, seperated by a semicolon (;), and it immediately parses it into a dataframe. We then use this dataframe to show statistics.
 
+### GoogleNews
+We also made use of the GoogleNews package. This package is a simple API for fetching news articles from Google. At the top of our dashboard you can see a random recent article regarding the corona virus in the Netherlands.
+
+How the package works is as follows:
+- First we instantiate the GoogleNews object and we pass in some arguments. Think of arguments such as the language, region and period of posted articles.
+- Then we execute the search by calling the .search() method, were we pass in this case 'Corona virus' as the topic we should be searching on.
+- We then fetch the results, by calling the .results() function. This returns a list of JSON objects looking like this:
+```json
+[{
+   "title":"LIVE | Kabinet trekt 95 miljoen uit voor coronahulp arme landen, medicijn Merck lijkt effectief tegen alle varianten",
+   "media":"De Stentor",
+   "date":"3 hours ago",
+   "datetime":"2021-12-12",
+   "desc":"CoronavirusEen experimenteel coronamedicijn van farmaceut Merck, molnupiravir genaamd, lijkt effectief te zijn tegen alle bekende varianten van het virus.",
+   "link":"www.destentor.nl/binnenland/live-kabinet-trekt-95-miljoen-uit-voor-coronahulp-arme-landen-medicijn-merck-lijkt-effectief-tegen-alle-varianten~a33336f0/",
+   "img":"data:image/gif;base64,R0lGODlhAQABAIAAAP"
+}, ...]
+```
+- The result() function returns a page of 10 articles. Every page has a maximum of 10 news articles. It is also possible to select a specific page by executing the get_page() function, where you pass the pagenumber as argument.
  ---
  ## Handy links
 - [Streamlit cheat sheet](https://share.streamlit.io/daniellewisdl/streamlit-cheat-sheet/app.py)
