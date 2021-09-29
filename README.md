@@ -77,6 +77,8 @@ In case an error pops up, please contact me or check out the following link (if 
 
 We paste this url into the read_csv() function of pandas, seperated by a semicolon (;), and it immediately parses it into a dataframe. We then use this dataframe to show statistics.
 
+*Reference to RIVM Covid-19: https://data.rivm.nl/covid-19/*
+
 ### GoogleNews
 We also made use of the GoogleNews package. This package is a simple API for fetching news articles from Google. At the top of our dashboard you can see a random recent article regarding the corona virus in the Netherlands.
 
@@ -96,6 +98,9 @@ How the package works is as follows:
 }, ...]
 ```
 - The result() function returns a page of 10 articles. Every page has a maximum of 10 news articles. It is also possible to select a specific page by executing the get_page() function, where you pass the pagenumber as argument.
+
+*Reference to GoogleNews: https://pypi.org/project/GoogleNews/*
+
  ---
  ## Handy links
 - [Streamlit cheat sheet](https://share.streamlit.io/daniellewisdl/streamlit-cheat-sheet/app.py)
