@@ -138,7 +138,7 @@ def Opname_overlijden():
 def sex_dec():
     df = load_data('COVID-19_casus_landelijk.csv',
                             "Date_statistics",
-                            "Date_statistics", local=True)
+                            "Date_statistics")
 
     start_s, end_s = gSlider.start_h, gSlider.end_h
     df = df[start_s:end_s]

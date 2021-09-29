@@ -15,6 +15,6 @@ def write_meta(url, index=None, dates=False, json=False, local=False):
         return pd.read_json(API_URL + url)
     else:
         if (local):
-            return pd.read_csv('data/' + url, delimiter=';', index_col=index, parse_dates=[dates])
+            return pd.read_csv('../data/' + url, delimiter=';', index_col=index, parse_dates=[dates])
         else: 
             return pd.read_csv(API_URL + url, delimiter=';', index_col=index, parse_dates=[dates])
