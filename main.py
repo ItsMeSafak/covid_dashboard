@@ -5,6 +5,7 @@ import components.Noah_plotly as noh_figg
 import components.sfk_plots as sfk_figg
 import components.Fleur as fleur
 import components.base as base
+import components.google_news as google
 
 def show_with_options(header, func):
     st.header(header)
@@ -35,6 +36,10 @@ def initialize_plots():
          )
         
     st.header('COVID-19 Dashboard')
+    _, news_col, _ = st.columns([1, 8, 1])
+
+    with news_col:
+        google.main()
 
     _, header_col, _ = st.columns([1, 8, 1])
     col1, _, col3 = st.columns([4, 1, 4])
