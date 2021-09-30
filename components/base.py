@@ -52,6 +52,7 @@ def sidebar():
                                             'Zuid-Holland-Zuid', 'Hollands-Midden', 'Rotterdam-Rijnmond', 'Haaglanden',
                                             'Zeeland', 'Brabant-Zuidoost', 'Midden- en West-Brabant', 'Brabant-Noord',
                                             'Limburg-Zuid', 'Limburg-Noord']))
+    st.sidebar.markdown('*Documentation: https://github.com/ItsMeSafak/covid_dashboard/blob/master/README.md*')
 
 def set_bg():
     if showBackground:
