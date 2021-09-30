@@ -1,8 +1,17 @@
 # COVID-19 Dashboard
 Hello there! Welcome to the corona dashboard made by team 1!
 
+**We are live: https://share.streamlit.io/itsmesafak/covid_dashboard/main.py**
+
 ---
 ## Setup and installations
+First of all, lets clone the repo. You can do this by opening your command prompt (terminal) and executing the following command:
+```sh
+git clone https://github.com/ItsMeSafak/covid_dashboard
+```
+This creates a copy of the project on you local machine! There may occur an error saying that 'git is unrecognized'. This means that you should install git first. 
+- *Installing git: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git*
+
 So before we start into acutal coding, we have to make sure that we configure the correct environment and install the required packages. 
 For starters, I highly reccomend using PyCharm. It can be a bit tricky at first, but once you setup everything your good to go! 
 
