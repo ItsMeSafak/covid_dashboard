@@ -93,8 +93,18 @@ We also made use of the GoogleNews package. This package is a simple API for fet
 
 How the package works is as follows:
 - First we instantiate the GoogleNews object and we pass in some arguments. Think of arguments such as the language, region and period of posted articles.
+```py
+googlenews = GoogleNews(lang='nl', region='NL', period='7d')
+```
 - Then we execute the search by calling the .search() method, were we pass in this case 'Corona virus' as the topic we should be searching on.
-- We then fetch the results, by calling the .results() function. This returns a list of JSON objects looking like this:
+```py
+googlenews.search('Corona virus')
+```
+- We then fetch the results, by calling the .results() function.
+```py
+news_dict = googlenews.result()
+```
+This returns a list of JSON objects looking like this:
 ```json
 [{
    "title":"LIVE | Kabinet trekt 95 miljoen uit voor coronahulp arme landen, medicijn Merck lijkt effectief tegen alle varianten",
