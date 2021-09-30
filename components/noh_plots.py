@@ -33,8 +33,7 @@ def sewer_plot():
 
     # Select region
     rwzi = st.selectbox('Selecteer een stad om de riooldata te bekijken.',
-                        sorted(df_riool["RWZI_AWZI_name"].unique()),
-                        index= sorted(df_riool["RWZI_AWZI_name"].unique()).index("Amsterdam West"))
+                        sorted(df_riool["RWZI_AWZI_name"].unique()))
 
     # City selection
     data_stad = df_riool[df_riool["RWZI_AWZI_name"] == rwzi]["RNA_flow_per_100000"].dropna().sort_index()
