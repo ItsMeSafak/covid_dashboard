@@ -1,4 +1,4 @@
-from utils.helpers import write_meta
+from utils.helpers import load_data
 import pandas as pd
 import plotly.express as px
 import streamlit as st
@@ -6,7 +6,7 @@ import components.base as gSlider
 
 
 def reproduction_plot():
-    df = write_meta('COVID-19_reproductiegetal.json', json=True)
+    df = load_data('COVID-19_reproductiegetal.json', json=True)
     df['Date'] = pd.to_datetime(df['Date'])
 
     df = df.set_index("Date")[gSlider.start_h: gSlider.end_h]

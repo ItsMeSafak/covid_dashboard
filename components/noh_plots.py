@@ -2,11 +2,11 @@ import components.base as gSlider
 import pandas as pd
 import plotly.express as px
 import streamlit as st
-from utils.helpers import write_meta
+from utils.helpers import load_data
 
 
 def ic_plot():
-    df_ic = write_meta('COVID-19_ic_opnames.csv',
+    df_ic = load_data('COVID-19_ic_opnames.csv',
                             "Date_of_statistics",
                             "Date_of_statistics").sort_index()
 
@@ -27,7 +27,7 @@ def ic_plot():
     st.plotly_chart(fig, use_container_width=True)
 
 def sewer_plot():
-    df_riool = write_meta('COVID-19_rioolwaterdata.csv',
+    df_riool = load_data('COVID-19_rioolwaterdata.csv',
                             "Date_measurement",
                             "Date_measurement").sort_index()
 
@@ -62,7 +62,7 @@ def sewer_plot():
 
 def sex_dec_plot():
     pre_title = ''
-    df = write_meta('COVID-19_casus_landelijk.csv',
+    df = load_data('COVID-19_casus_landelijk.csv',
                             "Date_statistics",
                             "Date_statistics")
 
@@ -107,7 +107,7 @@ def sex_dec_plot():
     st.plotly_chart(fig, use_container_width=True)
 
 def death_admission_plot():
-    df = write_meta('COVID-19_aantallen_gemeente_per_dag.csv',
+    df = load_data('COVID-19_aantallen_gemeente_per_dag.csv',
                             "Date_of_publication",
                             "Date_of_publication").dropna()
 
@@ -131,7 +131,7 @@ def death_admission_plot():
 
 def tests_plot():
     st.write('  ')
-    df_testen = write_meta('COVID-19_uitgevoerde_testen.csv',
+    df_testen = load_data('COVID-19_uitgevoerde_testen.csv',
                             "Date_of_statistics",
                             "Date_of_statistics").sort_index()
 

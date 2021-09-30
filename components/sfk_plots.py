@@ -1,11 +1,11 @@
 import streamlit as st
 import plotly.express as px
 import components.base as gSlider
-from utils.helpers import write_meta
+from utils.helpers import load_data
 
 
 def admissions_plot():
-    df_opnames_age = write_meta('COVID-19_ziekenhuis_ic_opnames_per_leeftijdsgroep.csv', dates="Date_of_statistics_week_start", index="Date_of_statistics_week_start")
+    df_opnames_age = load_data('COVID-19_ziekenhuis_ic_opnames_per_leeftijdsgroep.csv', dates="Date_of_statistics_week_start", index="Date_of_statistics_week_start")
     df_opnames_dropped = df_opnames_age.drop(columns=['Version', 'Date_of_report'])
 
     # Slice dataframe with global date slider
@@ -29,7 +29,7 @@ def admissions_plot():
     st.plotly_chart(fig2, use_container_width=True)
 
 def age_groups_plot():
-    df_opnames_age = write_meta('COVID-19_ziekenhuis_ic_opnames_per_leeftijdsgroep.csv', dates="Date_of_statistics_week_start", index="Date_of_statistics_week_start")
+    df_opnames_age = load_data('COVID-19_ziekenhuis_ic_opnames_per_leeftijdsgroep.csv', dates="Date_of_statistics_week_start", index="Date_of_statistics_week_start")
     df_opnames_dropped = df_opnames_age.drop(columns=['Version', 'Date_of_report'])
 
     # Slice dataframe with global date slider
